@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Richard Caprinolo | Intelligence & Cyber Security</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --text-primary: #1a1a18;
+    --text-secondary: #5a5a55;
+    --text-muted: #8a8a85;
+    --accent: #1d3a5f;
+    --accent-light: #e8eef5;
+    --accent-mid: #3a6090;
+    --border: #e0dfd8;
+    --tag-bg: #eaeae4;
+    --tag-text: #3a3a35;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Lato', system-ui, sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 2rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-mid);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 3px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid #c8d8ec;
+    font-weight: 500;
+  }
+  .badge.clearance {
+    background: #1d3a5f;
+    color: #c8d8ec;
+    border-color: #1d3a5f;
+  }
+
+  /* SECTION LAYOUT */
+  section {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-mid);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 2.5rem;
+    line-height: 1.2;
+  }
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--text-secondary);
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-stats { display: flex; flex-direction: column; gap: 1.5rem; }
+  .stat-item { border-left: 2px solid var(--accent); padding-left: 1rem; }
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .stat-label { font-size: 12px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+  }
+  .skill-card-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag {
+    font-size: 12px;
+    padding: 4px 10px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border-radius: 2px;
+    font-weight: 400;
+  }
+
+  /* PROJECTS */
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+  }
+  .project-card:last-child { margin-bottom: 0; }
+  .project-header { margin-bottom: 0.75rem; }
+  .project-type {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+  .project-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    font-weight: 400;
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 2px;
+    font-family: var(--mono);
+  }
+  .project-status {
+    align-self: start;
+    justify-self: end;
+  }
+  .status-pill {
+    font-size: 10px;
+    font-family: var(--mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .status-live { background: #e6f4ec; color: #256636; border: 1px solid #b8ddc3; }
+  .status-progress { background: #fff8e6; color: #7a5400; border: 1px solid #f0d98c; }
+
+  /* WRITEUPS */
+  .writeup-list { display: flex; flex-direction: column; gap: 0; }
+  .writeup-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+    gap: 2rem;
+  }
+  .writeup-item:first-child { border-top: 1px solid var(--border); }
+  .writeup-info {}
+  .writeup-category {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-mid);
+    margin-bottom: 0.25rem;
+  }
+  .writeup-title {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 400;
+  }
+  .writeup-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    font-family: var(--mono);
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .contact-card:hover {
+    border-color: var(--accent-mid);
+    background: var(--accent-light);
+  }
+  .contact-card-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+  .contact-card-value {
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .project-card { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">RC // Intelligence & Cyber</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#writeups">Write-ups</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">Richard Caprinolo &mdash; Maritime / Cyber / Intelligence</p>
+  <h1>Connecting <em>raw intelligence</em><br>to the cyber domain.</h1>
+  <p class="hero-sub">
+    Operationally experienced analyst and security professional blending 10+ years of high-threat field work, DoD contracting, and U.S. Navy service with a growing focus on cyber threat intelligence, OSINT, and insider threat analysis.
+  </p>
+  <div class="hero-meta">
+    <span class="badge clearance">&#x1F512; Active Secret Clearance</span>
+    <span class="badge">Gulf of Guinea &mdash; Current AOR</span>
+    <span class="badge">CI Polygraph Ready</span>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Background</p>
+  <h2 class="section-title">Field-tested analyst. Technically driven.</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        My career sits at the intersection of operational security and intelligence production. From controlling 199,000 square nautical miles of airspace as a U.S. Navy Radar Branch Chief, to conducting real-time pattern-of-life analysis of piracy action groups in the Gulf of Guinea, I've spent over a decade in environments where bad analysis costs lives.
+      </p>
+      <p>
+        I'm now building toward roles in cyber threat intelligence and insider threat analysis — disciplines where the same tradecraft skills (anomaly detection, behavioral analysis, multi-source fusion, structured reporting) directly apply to the digital domain. I don't just spot vulnerabilities; I contextualize the threat actors behind them.
+      </p>
+      <p>
+        Certifications in progress: CompTIA Security+, EC-Council CTIA, ITIL v4.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Years in high-threat environments</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Countries / Theaters of operation</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">GoG</div>
+        <div class="stat-label">Current AOR — West Africa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Capabilities</p>
+  <h2 class="section-title">Intelligence meets technical depth.</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-title">Intelligence &amp; Analysis</div>
+      <div class="skill-tags">
+        <span class="skill-tag">OSINT</span>
+        <span class="skill-tag">MITRE ATT&amp;CK</span>
+        <span class="skill-tag">Threat Assessment</span>
+        <span class="skill-tag">Pattern-of-Life Analysis</span>
+        <span class="skill-tag">IIR Production</span>
+        <span class="skill-tag">HUMINT</span>
+        <span class="skill-tag">TraceLabs CTF</span>
+        <span class="skill-tag">Insider Threat</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Cyber &amp; Technical</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Kali Linux</span>
+        <span class="skill-tag">Wireshark</span>
+        <span class="skill-tag">Nmap</span>
+        <span class="skill-tag">Splunk</span>
+        <span class="skill-tag">Network Analysis</span>
+        <span class="skill-tag">Incident Response</span>
+        <span class="skill-tag">Pen Testing (IBM)</span>
+        <span class="skill-tag">Forensics</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Operational &amp; Domain</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Maritime Domain Awareness</span>
+        <span class="skill-tag">AIS Analysis</span>
+        <span class="skill-tag">Counterintelligence</span>
+        <span class="skill-tag">DoD Contracting</span>
+        <span class="skill-tag">Joint Ops Support</span>
+        <span class="skill-tag">Rules of Engagement</span>
+        <span class="skill-tag">Federal Law Enforcement</span>
+        <span class="skill-tag">Air Traffic Control</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Reporting &amp; Frameworks</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Intelligence Report Writing</span>
+        <span class="skill-tag">BLUF Methodology</span>
+        <span class="skill-tag">PMESII-PT</span>
+        <span class="skill-tag">Risk Assessment</span>
+        <span class="skill-tag">Compliance Frameworks</span>
+        <span class="skill-tag">Multi-agency Coordination</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Portfolio</p>
+  <h2 class="section-title">Products that demonstrate KSAs.</h2>
+
+  <div class="project-card">
+    <div>
+      <div class="project-header">
+        <div class="project-type">Intelligence Portfolio &mdash; OSINT / Field Intelligence</div>
+        <div class="project-title">Gulf of Guinea Maritime Threat Environment &mdash; AFRICOM / Q2 2026</div>
+      </div>
+      <p class="project-desc">
+        Four-product intelligence portfolio produced to DoD/government standards: Intelligence Information Report (IIR), Maritime Threat Assessment with actor profiles and threat matrix, Country/Area Study covering the GoG strategic environment, and a BLUF Executive Summary with key judgments. Grounded in OSINT and direct operational observation from the GoG theater (Jan&ndash;Apr 2026).
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">IIR</span>
+        <span class="project-tag">Threat Assessment</span>
+        <span class="project-tag">Country Study</span>
+        <span class="project-tag">OSINT</span>
+        <span class="project-tag">AFRICOM</span>
+        <span class="project-tag">Maritime Security</span>
+        <span class="project-tag">UNCLASSIFIED // FOUO</span>
+      </div>
+    </div>
+    <div class="project-status">
+      <span class="status-pill status-live">Published</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div>
+      <div class="project-header">
+        <div class="project-type">Networking &amp; Security Lab</div>
+        <div class="project-title">Home Lab &mdash; Kali Linux / VirtualBox Security Environment</div>
+      </div>
+      <p class="project-desc">
+        Building a virtualized security lab environment using VirtualBox and Kali Linux for hands-on practice in network analysis, vulnerability assessment, and incident response workflows. Lab exercises document findings in structured write-up format.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">Kali Linux</span>
+        <span class="project-tag">VirtualBox</span>
+        <span class="project-tag">Wireshark</span>
+        <span class="project-tag">Nmap</span>
+        <span class="project-tag">Network Security</span>
+      </div>
+    </div>
+    <div class="project-status">
+      <span class="status-pill status-progress">In Progress</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div>
+      <div class="project-header">
+        <div class="project-type">CTF / OSINT</div>
+        <div class="project-title">TraceLabs &mdash; Missing Persons CTF Judge &amp; Analyst</div>
+      </div>
+      <p class="project-desc">
+        Served as CTF judge for TraceLabs, a law-enforcement-partnered missing persons OSINT competition. Evaluated analyst submissions, assessed source quality, and applied structured analytical tradecraft to real-world humanitarian intelligence tasks.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">OSINT</span>
+        <span class="project-tag">TraceLabs</span>
+        <span class="project-tag">Law Enforcement</span>
+        <span class="project-tag">Source Evaluation</span>
+      </div>
+    </div>
+    <div class="project-status">
+      <span class="status-pill status-live">Completed</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- WRITE-UPS -->
+<section id="writeups">
+  <p class="section-label">Analysis &amp; Write-ups</p>
+  <h2 class="section-title">Practitioner-level ground truth.</h2>
+  <div class="writeup-list">
+    <div class="writeup-item">
+      <div class="writeup-info">
+        <div class="writeup-category">Maritime Intelligence</div>
+        <div class="writeup-title">PAG Resurgence in the Gulf of Guinea &mdash; Pattern Analysis &amp; Key Intelligence Gaps</div>
+      </div>
+      <div class="writeup-meta">Apr 2026</div>
+    </div>
+    <div class="writeup-item">
+      <div class="writeup-info">
+        <div class="writeup-category">Threat Actor Profiling</div>
+        <div class="writeup-title">Shadow Fleet &amp; Dark Fleet Operators: CI Relevance in the GoG Registry System</div>
+      </div>
+      <div class="writeup-meta">Apr 2026</div>
+    </div>
+    <div class="writeup-item">
+      <div class="writeup-info">
+        <div class="writeup-category">Emerging Threats</div>
+        <div class="writeup-title">Jihadist Coastal Vector &mdash; JNIM Expansion and the 2&ndash;3 Year Window for GoG Littoral Threat</div>
+      </div>
+      <div class="writeup-meta">Apr 2026</div>
+    </div>
+    <div class="writeup-item">
+      <div class="writeup-info">
+        <div class="writeup-category">Cyber Threat Intelligence</div>
+        <div class="writeup-title">Applying Maritime Pattern-of-Life Analysis to Network Traffic Anomaly Detection</div>
+      </div>
+      <div class="writeup-meta">Coming soon</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <h2 class="section-title">Let's connect.</h2>
+  <div class="contact-grid">
+    <a class="contact-card" href="mailto:rcaprinolo3@gmail.com">
+      <div class="contact-card-label">Email</div>
+      <div class="contact-card-value">rcaprinolo3@gmail.com</div>
+    </a>
+    <a class="contact-card" href="https://linkedin.com/in/rick041984" target="_blank" rel="noopener">
+      <div class="contact-card-label">LinkedIn</div>
+      <div class="contact-card-value">linkedin.com/in/rick041984</div>
+    </a>
+    <a class="contact-card" href="https://github.com/" target="_blank" rel="noopener">
+      <div class="contact-card-label">GitHub</div>
+      <div class="contact-card-value">github.com/[your-handle]</div>
+    </a>
+    <div class="contact-card" style="cursor: default;">
+      <div class="contact-card-label">Location</div>
+      <div class="contact-card-value">Fresno, TX &mdash; Current: GoG</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Richard Caprinolo &mdash; Intelligence &amp; Cyber &mdash; UNCLASSIFIED
+</footer>
+
+</body>
+</html>
